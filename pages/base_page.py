@@ -12,6 +12,10 @@ class BasePage:
         self.url = url
         self.browser.implicitly_wait(timeout)
 
+    def go_to_basket_page(self):
+        basket_link = self.browser.find_element(By.CSS_SELECTOR, ".basket-mini a")
+        basket_link.click()
+
     def open(self):
         self.browser.get(self.url)
 

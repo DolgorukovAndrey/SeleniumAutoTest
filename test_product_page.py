@@ -1,7 +1,18 @@
+from .pages.main_page import MainPage
+from .pages.basket_page import BasketPage
 from .pages.product_page import ProductPage
 import pytest
 
 PRODUCT_LINK = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/"
+    page = MainPage(browser, link)
+    page.open()
+    page.go_to_basket_page() # Переходим в корзину
+    basket_page = BasketPage(browser, browser.current_url) # Инициализируем страницу корзины
+    basket_page.should_be_empty_basket() # Проверяем, что товаров нет
+    basket_page.should_be_empty_basket_text() # Проверяем, что есть текст о пустоте
 
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
