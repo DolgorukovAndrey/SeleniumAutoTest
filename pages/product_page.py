@@ -21,3 +21,11 @@ class ProductPage(BasePage):
         
         # СТРОГАЯ ПРОВЕРКА: сообщение ДОЛЖНО начинаться с названия товара
         assert success_message.startswith(product_name), f"БАГ! Ожидали '{product_name}', а получили '{success_message}'"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disappeared"
